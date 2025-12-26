@@ -1,0 +1,30 @@
+Algorithm Sentence_Analysis
+
+Initialize:
+    length = 0
+    words = 1
+    vowels = 0
+
+Read character c
+
+WHILE c != '.' DO
+    length = length + 1
+
+    IF c = ' ' THEN
+        words = words + 1
+    END IF
+
+    IF c = 'a' OR c = 'e' OR c = 'i' OR c = 'o' OR c = 'u'
+       OR c = 'A' OR c = 'E' OR c = 'I' OR c = 'O' OR c = 'U' THEN
+        vowels = vowels + 1
+    END IF
+
+    Read next character c
+END WHILE
+
+Output:
+    Length of sentence = length
+    Number of words = words
+    Number of vowels = vowels
+
+End Algorithm
