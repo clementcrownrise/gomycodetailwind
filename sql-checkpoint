@@ -1,0 +1,61 @@
+1
+-- Display all the data of customers 
+SELECT * FROM Customers;
+
+2
+-- Display product_name and category for products with price between 5000 and 10000
+SELECT product_name, category 
+FROM Products 
+WHERE price BETWEEN 5000 AND 10000;
+
+
+3
+-- Display all product data sorted by price (highest to lowest)
+SELECT * FROM Products 
+ORDER BY price DESC;
+
+4
+-- Display total orders, average amount, highest and lowest total amounts
+SELECT 
+    COUNT(*) AS total_orders, 
+    AVG(total_amount) AS average_amount, 
+    MAX(total_amount) AS highest_amount, 
+    MIN(total_amount) AS lowest_amount 
+FROM Orders;
+
+-- For each product_id, display the number of orders
+SELECT product_id, COUNT(*) AS number_of_orders 
+FROM Orders 
+GROUP BY product_id;
+
+5
+-- Display customer_id with more than 2 orders
+SELECT customer_id 
+FROM Orders 
+GROUP BY customer_id 
+HAVING COUNT(*) > 2;
+
+6
+-- For each month of 2020, display the number of orders
+SELECT EXTRACT(MONTH FROM OrderDate) AS month, COUNT(*) AS order_count
+FROM Orders
+WHERE OrderDate BETWEEN '2020-01-01' AND '2020-12-31'
+GROUP BY EXTRACT(MONTH FROM order_date);
+
+7
+-- Display product_name, customer_name, and order_date 
+SELECT p.product_name, c.customer_name, o.order_date
+FROM Orders o
+JOIN Products p ON o.product_id = p.product_id
+JOIN Customers c ON o.customer_id = c.customer_id;
+
+8
+-- Display all orders made three months ago
+SELECT * FROM Orders 
+WHERE OrderDate >= CURRENT_DATE - INTERVAL '3 months';
+
+9
+-- Display customers who have never ordered a product
+SELECT customer_id 
+FROM Customers 
+WHERE customer_id NOT IN (SELECT customer_id FROM Orders);
